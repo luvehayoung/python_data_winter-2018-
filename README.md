@@ -1,4 +1,4 @@
-# python_data_winter-2018-
+﻿# python_data_winter-2018-
 python project to study data analysis
 
 ## road map
@@ -14,4 +14,5 @@ numpy, pandas, ......
 * books:
 
 
-## 프로젝트 주제 선정 - 스터디의 목표 선정하기
+## 프로젝트 주제 선정 
+1) 교환학생용 지도 만들기
