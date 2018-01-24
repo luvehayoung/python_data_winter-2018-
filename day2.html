@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head><meta charset="utf-8" />
-<title>index</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<title>day2</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 
 <style type="text/css">
@@ -11775,15 +11775,301 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Hello">Hello<a class="anchor-link" href="#Hello">&#182;</a></h1><p>This is my first project</p>
-<ul>
-    <li><a href = "./day1.html">day1</a></li>
-    <li><a href = "./genesis_crawling.html">genesis_crawling(beautifulsoup을 이용해서 커뮤니티 게시를 가져오기</a></li>
-    <li><a href = "./day2.html">day2 - selenium을 이용한 크롤링</a></li>
-    <li><a href = "./day3.html">day3 - 네이버 댓글 가져오기</a></li>
-</ul>
+<h1 id="day2">day2<a class="anchor-link" href="#day2">&#182;</a></h1>
 </div>
 </div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><a href="http://blog.naver.com/PostView.nhn?blogId=nonamed0000&amp;logNo=220977390647&amp;redirect=Dlog&amp;widgetTypeCall=true">http://blog.naver.com/PostView.nhn?blogId=nonamed0000&amp;logNo=220977390647&amp;redirect=Dlog&amp;widgetTypeCall=true</a></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># selenium </span>
+<span class="kn">from</span> <span class="nn">selenium</span> <span class="k">import</span> <span class="n">webdriver</span>
+<span class="kn">from</span> <span class="nn">selenium.webdriver.common.keys</span> <span class="k">import</span> <span class="n">Keys</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="n">sec</span> <span class="o">=</span> <span class="mi">50</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># chrome web driver생성</span>
+<span class="n">driver</span> <span class="o">=</span> <span class="n">webdriver</span><span class="o">.</span><span class="n">Chrome</span><span class="p">(</span><span class="s1">&#39;C:/Users/Seo/chromedriver_win32/chromedriver.exe&#39;</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#url 로딩</span>
+<span class="n">driver</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;https://global.uos.ac.kr/iiceIntro/index.do&#39;</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#체험수기 페이지로 이동하기</span>
+<span class="n">elem</span> <span class="o">=</span> <span class="n">driver</span><span class="o">.</span><span class="n">find_element_by_css_selector</span><span class="p">(</span><span class="s1">&#39;.cont a:nth-child(2)&#39;</span><span class="p">)</span>
+<span class="n">elem</span><span class="o">.</span><span class="n">click</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">elem</span> <span class="o">=</span> <span class="n">driver</span><span class="o">.</span><span class="n">find_element_by_css_selector</span><span class="p">(</span><span class="s1">&#39;#gnb li:nth-child(3) a&#39;</span><span class="p">)</span>
+<span class="n">elem</span><span class="o">.</span><span class="n">click</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">elem</span> <span class="o">=</span> <span class="n">driver</span><span class="o">.</span><span class="n">find_element_by_css_selector</span><span class="p">(</span><span class="s1">&#39;.floor:nth-child(3) &gt; .cont &gt; ul &gt; li:nth-child(3) a&#39;</span><span class="p">)</span>
+<span class="n">elem</span><span class="o">.</span><span class="n">click</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">region</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">title</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">writer</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">date</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">email</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">file_name</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="c1">#첫번째 글</span>
+<span class="n">elem</span> <span class="o">=</span> <span class="n">driver</span><span class="o">.</span><span class="n">find_element_by_css_selector</span><span class="p">(</span><span class="s1">&#39;tbody tr:nth-child(1) td:nth-child(3) a&#39;</span><span class="p">)</span>
+<span class="n">elem</span><span class="o">.</span><span class="n">click</span><span class="p">()</span>
+
+<span class="c1">#첨부파일 수</span>
+<span class="c1">#게시글 다운로드</span>
+<span class="c1">#elem = driver.find_element_by_css_selector(&#39;tbody tr:nth-child(5) a&#39;)</span>
+<span class="n">elem</span> <span class="o">=</span> <span class="n">driver</span><span class="o">.</span><span class="n">find_elements_by_xpath</span><span class="p">(</span><span class="s2">&quot;//a[@class=&#39;dbtn&#39;]&quot;</span><span class="p">)</span>
+<span class="n">elem_length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">elem</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">elem_length</span><span class="p">):</span>
+    <span class="c1">#지역</span>
+    <span class="n">region</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">driver</span><span class="o">.</span><span class="n">find_element_by_css_selector</span><span class="p">(</span><span class="s1">&#39;tbody tr:nth-child(1) td&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+
+    <span class="c1">#제목</span>
+    <span class="n">title</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">driver</span><span class="o">.</span><span class="n">find_element_by_css_selector</span><span class="p">(</span><span class="s1">&#39;tbody tr:nth-child(2) td&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+
+    <span class="c1">#작성자</span>
+    <span class="n">writer</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">driver</span><span class="o">.</span><span class="n">find_element_by_css_selector</span><span class="p">(</span><span class="s1">&#39;tbody tr:nth-child(3) td:nth-child(2)&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+
+    <span class="c1">#날짜</span>
+    <span class="n">date</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">driver</span><span class="o">.</span><span class="n">find_element_by_css_selector</span><span class="p">(</span><span class="s1">&#39;tbody tr:nth-child(3) td:nth-child(4)&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+
+    <span class="c1">#이메일</span>
+    <span class="n">email</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">driver</span><span class="o">.</span><span class="n">find_element_by_css_selector</span><span class="p">(</span><span class="s1">&#39;tbody tr:nth-child(3) td:nth-child(6)&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+       
+    <span class="n">elem</span> <span class="o">=</span> <span class="n">driver</span><span class="o">.</span><span class="n">find_element_by_css_selector</span><span class="p">(</span><span class="s1">&#39;tbody tr:nth-child(5) a:nth-child(&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;)&#39;</span><span class="p">)</span>
+    <span class="n">elem</span><span class="o">.</span><span class="n">click</span><span class="p">()</span>
+    
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">sec</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#이전 글</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">917</span><span class="p">):</span>
+    <span class="c1">#이전 글 선택</span>
+    <span class="n">elem</span> <span class="o">=</span> <span class="n">driver</span><span class="o">.</span><span class="n">find_element_by_css_selector</span><span class="p">(</span><span class="s1">&#39;.pageTable .l10 a&#39;</span><span class="p">)</span>
+    <span class="n">elem</span><span class="o">.</span><span class="n">click</span><span class="p">()</span>
+    
+    <span class="c1"># 0 1 2</span>
+    <span class="c1"># 1 3 5</span>
+    <span class="c1"># 1 2 3    </span>
+    <span class="c1">#첨부파일 수</span>
+    <span class="c1">#게시글 다운로드</span>
+    <span class="c1">#elem = driver.find_element_by_css_selector(&#39;tbody tr:nth-child(5) a&#39;)</span>
+    <span class="n">elem</span> <span class="o">=</span> <span class="n">driver</span><span class="o">.</span><span class="n">find_elements_by_xpath</span><span class="p">(</span><span class="s2">&quot;//a[@class=&#39;dbtn&#39;]&quot;</span><span class="p">)</span>
+    <span class="n">elem_length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">elem</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+    
+    
+    <span class="c1">#정보들</span>
+    <span class="c1">#지역</span>
+    <span class="n">region</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">driver</span><span class="o">.</span><span class="n">find_element_by_css_selector</span><span class="p">(</span><span class="s1">&#39;tbody tr:nth-child(1) td&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+
+    <span class="c1">#제목</span>
+    <span class="n">title</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">driver</span><span class="o">.</span><span class="n">find_element_by_css_selector</span><span class="p">(</span><span class="s1">&#39;tbody tr:nth-child(2) td&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+
+    <span class="c1">#작성자</span>
+    <span class="n">writer</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">driver</span><span class="o">.</span><span class="n">find_element_by_css_selector</span><span class="p">(</span><span class="s1">&#39;tbody tr:nth-child(3) td:nth-child(2)&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+
+    <span class="c1">#날짜</span>
+    <span class="n">date</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">driver</span><span class="o">.</span><span class="n">find_element_by_css_selector</span><span class="p">(</span><span class="s1">&#39;tbody tr:nth-child(3) td:nth-child(4)&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+
+    <span class="c1">#이메일</span>
+    <span class="n">email</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">driver</span><span class="o">.</span><span class="n">find_element_by_css_selector</span><span class="p">(</span><span class="s1">&#39;tbody tr:nth-child(3) td:nth-child(6)&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+    
+    
+    <span class="n">gap</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">elem_length</span><span class="p">):</span>
+        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
+        <span class="n">elem</span> <span class="o">=</span> <span class="n">driver</span><span class="o">.</span><span class="n">find_element_by_css_selector</span><span class="p">(</span><span class="s1">&#39;tbody tr:nth-child(5) a:nth-child(&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="n">gap</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;)&#39;</span><span class="p">)</span>
+        <span class="n">elem</span><span class="o">.</span><span class="n">click</span><span class="p">()</span>
+        <span class="n">gap</span><span class="o">+=</span><span class="mi">1</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">region</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">file_count</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">time</span>
+<span class="n">sec</span> <span class="o">=</span> <span class="mi">50</span>
+<span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">sec</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">region</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">import os</span>
+<span class="sd">import shutil</span>
+<span class="sd">path = &#39;C:/Users/Seo/Downloads/&#39;</span>
+
+<span class="sd">count = 0</span>
+<span class="sd">i = 0</span>
+
+<span class="sd">#filename = max([f for f in os.listdir(path)], key=os.path.getctime)</span>
+<span class="sd">filename = []</span>
+<span class="sd">filename = os.listdir(path)</span>
+
+<span class="sd">for file in filename:</span>
+<span class="sd">    print(file)</span>
+<span class="sd">    </span>
+<span class="sd">for index in range(len(file)-1):</span>
+<span class="sd">    os.rename(path+file[index], path+region[i]+&#39;_&#39;+title[i]+&#39;_&#39;+writer[i]+&#39;_&#39;+date[i]+str(count+1)+file[index][-4:])</span>
+
+<span class="sd">    count += 1</span>
+<span class="sd">    </span>
+<span class="sd">    if count == file_count[i]:</span>
+<span class="sd">        i += 1</span>
+<span class="sd">        count = 0</span>
+<span class="sd">&#39;&#39;&#39;</span>    
+</pre></div>
+
+</div>
+</div>
+</div>
+
 </div>
     </div>
   </div>
