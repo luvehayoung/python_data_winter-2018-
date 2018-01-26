@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head><meta charset="utf-8" />
-<title>index</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<title>naver댓글 크롤링 제출용</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 
 <style type="text/css">
@@ -11775,17 +11775,186 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Hello">Hello<a class="anchor-link" href="#Hello">&#182;</a></h1><p>This is my first project</p>
-<ul>
-    <li><a href = "./day1.html">day1</a></li>
-    <li><a href = "./genesis_crawling.html">genesis_crawling(beautifulsoup을 이용해서 커뮤니티 게시를 가져오기</a></li>
-    <li><a href = "./day2.html">day2 - selenium을 이용한 크롤링</a></li>
-    <li><a href = "./day3.html">day3 - 네이버 댓글 가져오기</a></li>
-    <li><a href = "./day3.html">day3 - 네이버 댓글 가져오기</a></li>
-    <li><a href = "./day4.html">day4 - 댓글 크롤링 코드 정리</a></li>
-</ul>
+<h1 id="&#45348;&#51060;&#48260;-&#45843;&#44544;-&#53356;&#47204;&#47553;(&#51228;&#45348;&#49884;&#49828;-&#54217;&#54032;-&#51312;&#49324;)">&#45348;&#51060;&#48260; &#45843;&#44544; &#53356;&#47204;&#47553;(&#51228;&#45348;&#49884;&#49828; &#54217;&#54032; &#51312;&#49324;)<a class="anchor-link" href="#&#45348;&#51060;&#48260;-&#45843;&#44544;-&#53356;&#47204;&#47553;(&#51228;&#45348;&#49884;&#49828;-&#54217;&#54032;-&#51312;&#49324;)">&#182;</a></h1><p>(기간 2017년 9월 ~ 2018년 1월 각 브랜드별 282개의 댓글 분석)</p>
+
 </div>
 </div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="c1"># selenium </span>
+<span class="kn">from</span> <span class="nn">selenium</span> <span class="k">import</span> <span class="n">webdriver</span>
+<span class="kn">from</span> <span class="nn">selenium.webdriver.common.keys</span> <span class="k">import</span> <span class="n">Keys</span>
+<span class="kn">from</span> <span class="nn">selenium.common.exceptions</span> <span class="k">import</span> <span class="n">StaleElementReferenceException</span><span class="p">,</span><span class="n">NoSuchElementException</span><span class="p">,</span><span class="n">WebDriverException</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="n">sec</span> <span class="o">=</span> <span class="mf">0.1</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#replys</span>
+<span class="n">data</span> <span class="o">=</span> <span class="p">{}</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#모듈화</span>
+<span class="k">def</span> <span class="nf">naver_reply_crawler</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>
+    <span class="c1"># chrome web driver생성</span>
+    <span class="n">driver</span> <span class="o">=</span> <span class="n">webdriver</span><span class="o">.</span><span class="n">Chrome</span><span class="p">(</span><span class="s1">&#39;C:/Users/Seo/chromedriver_win32/chromedriver.exe&#39;</span><span class="p">)</span>
+   
+    <span class="c1">#url 로딩</span>
+    <span class="n">driver</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+    
+    <span class="c1">#게시글 댓글 10페이지까지만 읽어오기</span>
+    <span class="c1">#댓글 첫페이지는 13개씩 보이고, 그다음부터 10개씩 보임</span>
+    <span class="n">replys</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">13</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">replys</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                <span class="n">driver</span><span class="o">.</span><span class="n">find_element_by_css_selector</span><span class="p">(</span><span class="s1">&#39;.u_cbox_content_wrap li:nth-child(&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;) .u_cbox_text_wrap .u_cbox_contents&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span>
+            <span class="p">)</span>
+        <span class="k">except</span><span class="p">:</span>
+                <span class="n">replys</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;차단된 댓글입니다&#39;</span><span class="p">)</span>
+               
+    <span class="c1">#다음 페이지로이동</span>
+    <span class="n">elem</span> <span class="o">=</span> <span class="n">driver</span><span class="o">.</span><span class="n">find_element_by_css_selector</span><span class="p">(</span><span class="s1">&#39;.u_cbox_page_wrap a:nth-child(4)&#39;</span><span class="p">)</span>
+    <span class="n">elem</span><span class="o">.</span><span class="n">click</span><span class="p">()</span>    
+    
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">13</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+            <span class="k">try</span><span class="p">:</span> 
+                <span class="n">replys</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                    <span class="n">driver</span><span class="o">.</span><span class="n">find_element_by_css_selector</span><span class="p">(</span><span class="s1">&#39;.u_cbox_content_wrap li:nth-child(&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;) .u_cbox_text_wrap .u_cbox_contents&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span>
+                <span class="p">)</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="n">replys</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;차단된 댓글입니다&#39;</span><span class="p">)</span>
+                
+            
+        <span class="n">elem</span> <span class="o">=</span> <span class="n">driver</span><span class="o">.</span><span class="n">find_element_by_css_selector</span><span class="p">(</span><span class="s1">&#39;.u_cbox_page_wrap a:nth-child(&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">j</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;)&#39;</span><span class="p">)</span>
+        <span class="n">elem</span><span class="o">.</span><span class="n">click</span><span class="p">()</span>
+        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">sec</span><span class="p">)</span>
+    <span class="n">driver</span><span class="o">.</span><span class="n">quit</span><span class="p">()</span>   
+    <span class="k">return</span> <span class="n">replys</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">page_list</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;https://auto.naver.com/car/talk.nhn?yearsId=121603&quot;</span><span class="p">,</span> <span class="c1">#제네시스 2018 g80</span>
+    <span class="s2">&quot;https://auto.naver.com/car/talk.nhn?yearsId=121449&quot;</span><span class="p">,</span> <span class="c1">#제네시스 2017 g70</span>
+    <span class="s2">&quot;https://auto.naver.com/car/talk.nhn?yearsId=69265&quot;</span><span class="p">,</span> <span class="c1">#제네시스 2017 eq900</span>
+    <span class="s2">&quot;https://auto.naver.com/car/talk.nhn?yearsId=60007&quot;</span><span class="p">,</span> <span class="c1">#2016 bmw 3 series </span>
+     <span class="s2">&quot;https://auto.naver.com/car/talk.nhn?yearsId=121215&quot;</span><span class="p">,</span> <span class="c1">#2018 bmw 5 series</span>
+    <span class="s2">&quot;https://auto.naver.com/car/talk.nhn?yearsId=68073&quot;</span><span class="p">,</span> <span class="c1">#2017 bmw 7 series</span>
+    <span class="s2">&quot;https://auto.naver.com/car/talk.nhn?yearsId=61925&quot;</span><span class="p">,</span> <span class="c1">#2016 벤츠 C클래스</span>
+    <span class="s2">&quot;https://auto.naver.com/car/talk.nhn?yearsId=120219&quot;</span><span class="p">,</span> <span class="c1">#2018 벤츠 S클래스</span>
+    <span class="s2">&quot;https://auto.naver.com/car/talk.nhn?yearsId=61349&quot;</span><span class="p">,</span> <span class="c1">#2016 벤츠 E 클래스</span>
+    
+    
+<span class="p">]</span>
+<span class="n">page_name</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s1">&#39;제네시스 2017 g70&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;제네시스 2018 g80&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;제네시스 2017 eq900&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;2016 bmw 3 series&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;2018 bmw 5 series&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;2017 bmw 7 series&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;2016 벤츠 C클래스&#39;</span><span class="p">,</span> 
+    <span class="s1">&#39;2018 벤츠 S클래스 L&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;2016 벤츠 E 클래스&#39;</span>
+<span class="p">]</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">page_list</span><span class="p">)):</span>
+    <span class="n">reply</span> <span class="o">=</span> <span class="n">naver_reply_crawler</span><span class="p">(</span><span class="n">page_list</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+    <span class="n">data</span><span class="p">[</span><span class="n">page_name</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">=</span> <span class="n">reply</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">data</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">columns</span> <span class="o">=</span> <span class="n">page_name</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">columns</span><span class="p">)</span>
+<span class="n">df</span> 
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;result.csv&#39;</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
 </div>
     </div>
   </div>
